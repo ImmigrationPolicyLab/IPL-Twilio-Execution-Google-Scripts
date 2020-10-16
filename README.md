@@ -11,3 +11,4 @@ Install all dependencies.
 
 ### Resources:
 Guide for using clasp: https://yagisanatode.com/2019/04/01/working-with-google-apps-script-in-visual-studio-code-using-clasp/
+Clasp repository on github [https://github.com/google/clasp]
