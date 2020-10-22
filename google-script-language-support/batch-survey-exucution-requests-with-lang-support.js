@@ -45,8 +45,8 @@ function batchSurveyLanguageSupport() {
       var language = values[nextBatchStartRow + r][1];
 
       options.payload = {
-        "To": "whatsapp:+" + numFromSheet,
-        "From": "whatsapp" + languageFlowData[language].number,
+        "To": numFromSheet,
+        "From": languageFlowData[language].number,
       }
       var url = "https://studio.twilio.com/v1/Flows/" + languageFlowData[language].flowId + "/Executions";
       var response = JSON.parse(UrlFetchApp.fetch(url,options));
