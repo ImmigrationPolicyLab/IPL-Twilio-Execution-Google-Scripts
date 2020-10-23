@@ -10,7 +10,8 @@ function batchSurvey() {
   var sheetName = "executions";
 
   // Use the Twilio number to set the number that will send messages
-  var fromNumber = "YOUR_TWILIO_NUMBER"; // ensure this number is formatted with a "+" at the beginning
+  // ensure this number is formatted with a "+" at the beginning or SMS, or "whatsapp:+" for a whatsapp number
+  var fromNumber = "YOUR_TWILIO_NUMBER";
 
   // Set the batch size (the number of surveys to send in one batch)
   // Recommended: 20 surveys per batch, with 3 minute interval wait time
@@ -53,8 +54,12 @@ function batchSurvey() {
       // If the row number is within the table range, send the survey request and record the response
       var toNumber = values[nextBatchStartRow + r][0];
 
+      var formattedToNumber = "+" + toNumber;
+      // if sending to a whatsapp number, delete line 56 and uncomment the line below to set formatted number
+      // var formattedToNumber = "whatsapp:+" + toNumber;
+
       options.payload = {
-        "To": toNumber,
+        "To": formattedToNumber,
         "From": fromNumber,
       }
       var url = "https://studio.twilio.com/v1/Flows/" + flowId + "/Executions";
