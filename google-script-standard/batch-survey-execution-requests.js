@@ -84,7 +84,7 @@ function batchSurvey() {
 function startSurveyBatching() {
   // Set the wait time between batches
   // Recommended: 20 surveys per batch, with 3 minute interval wait time
-  var interval = 3;
+  var interval = 5;
   // Trigger batch every [inverval] minute
   Logger.log("startSurveyBatching called");
   ScriptApp.newTrigger("batchSurvey")
