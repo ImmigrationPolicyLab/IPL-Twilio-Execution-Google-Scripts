@@ -1,0 +1,31 @@
+{
+  "timeZone": "America/Los_Angeles",
+  "dependencies": {
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "sheets": {
+    "macros": [{
+      "menuName": "myFunction",
+      "functionName": "myFunction"
+    }, {
+      "menuName": "postRequest",
+      "functionName": "postRequest"
+    }, {
+      "menuName": "batchSurvey",
+      "functionName": "batchSurvey"
+    }, {
+      "menuName": "readExecutions",
+      "functionName": "readExecutions"
+    }, {
+      "menuName": "getAllExecutions",
+      "functionName": "getAllExecutions"
+    }, {
+      "menuName": "createTrigger",
+      "functionName": "createTrigger"
+    }, {
+      "menuName": "startSurveyBatching",
+      "functionName": "startSurveyBatching"
+    }]
+  }
+}
