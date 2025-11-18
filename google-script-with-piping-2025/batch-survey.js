@@ -41,11 +41,10 @@ const startSurveyBatching = (isTest = false, contactDataSheetName = null, respon
   // For testing always make sure interval is set to 1.
   interval = isTest ? 1 : interval;
 
-  // Trigger batch every [inverval] minute
+  // Trigger batch every [interval] minute
   Logger.log("startSurveyBatching called");
 
   // Call batchSurvey to kick off initial batch
-  // test out if the trigger will mostly execute quickly
   // sendSurveyBatch();
 
   // Create trigger to kick off new batch after delayed interval
@@ -66,27 +65,23 @@ const startSurveyBatching = (isTest = false, contactDataSheetName = null, respon
 
 async function sendSurveyBatch(e) {
   try {
+    // Test values are stored in the script properties and set here to execute the test scenario.
+    // If not a test, the program uses the values set by the users as constants earlier in the script.
+    // Nothing needs to be changed here between running production and tests.
     const triggerId = e?.triggerUid;
     const constantData = PropertiesService.getScriptProperties().getProperty(triggerId);
+
     const { contactDataSheetName, responseSheetName, batchSizeTest, isTest } = JSON.parse(constantData) || {};
 
-    // If the batch is not kicked off as part of a trigger, then default to the sheet names set in the constant file
-
-    // Use the url to access the sheet that needs to be edited
-    const spreadSheetDoc = SpreadsheetApp.openByUrl('https://docs.google.com/spreadsheets/d/1lYoDTbws9zxKJl1AuhbC1xG3JhFzCoHGGXm8aDnpGvg/edit?gid=136696754#gid=136696754');
-
-    const contactSheetData = spreadSheetDoc.getSheetByName(
+    // Execute on the active sheet that is attached to the script
+    let contactSheetData = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
       contactDataSheetName ? contactDataSheetName : surveyContactDataSheetName
     );
-
-    // Execute on the active sheet that is attached to the script
-    // let contactSheetData = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
-    //   contactDataSheetName ? contactDataSheetName : surveyContactDataSheetName
-    // );
     
     let responseSheetData = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
       responseSheetName ? responseSheetName : surveyResponseSheetName
     );
+
     batchSize = isTest ? parseInt(batchSizeTest) : batchSize;
 
     const values = contactSheetData.getDataRange().getValues();
